@@ -6,7 +6,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      items: ['task'],
+      items: [],
       newItem: ''
     }
   }
@@ -21,8 +21,8 @@ class App extends Component {
 
   getItems() {
     let list = this.state.items
-    let mappedList = list.map((task, i) => (
-      <li key={i}>{task}</li>
+    let mappedList = list.map((item) => (
+      <li key={item.id}>{item.task}<button onClick={() => this.delete(item.id)}>delete</button></li>
     ))
     return (
       <ul className="list">
@@ -37,6 +37,13 @@ class App extends Component {
     this.setState({
       items: res.data,
       newItem: ''
+    })
+  }
+
+  async delete(id) {
+    let res = await axios.delete(`/api/delete/${id}`)
+    this.setState({
+      items: res.data
     })
   }
   render() {
