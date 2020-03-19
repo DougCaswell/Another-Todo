@@ -23,8 +23,9 @@ app.post('/api/new', (req, res) => {
 
 app.delete('/api/delete/:id', (req, res) => {
     const { id } = req.params;
-    let start = list.findIndex((item, i) => i === id);
+    let start = list.findIndex((item) => item.id == id);
     list.splice(start, 1)
     res.status(200).send(list)
 })
+
 app.listen(4444, () => console.log('app is running on port 4444'));

@@ -13,7 +13,6 @@ class App extends Component {
 
   async componentDidMount() {
     let res = await axios.get('/api/get');
-    console.log(res.data)
     this.setState({
       items: res.data
     });
