@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './App.css';
 
 class App extends Component {
@@ -9,12 +10,13 @@ class App extends Component {
     }
   }
 
-  //   async componentDidMount() {
-  //     let res = await axios.get('/api/employees');
-  //     this.setState({
-  //         employees: res.data
-  //     });
-  // }
+  async componentDidMount() {
+    let res = await axios.get('/api/get');
+    console.log(res.data)
+    this.setState({
+      items: res.data
+    });
+  }
 
   getItems() {
     let list = this.state.items
