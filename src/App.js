@@ -6,7 +6,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      items: ['task']
+      items: ['task'],
+      newItem: ''
     }
   }
 
@@ -29,11 +30,23 @@ class App extends Component {
       </ul>
     )
   }
+
+  async addItem() {
+    let item = this.state.newItem;
+    let res = await axios.post('/api/new', { item })
+    this.setState({
+      items: res.data,
+      newItem: ''
+    })
+  }
   render() {
     return (
       <div className="App" >
         <h1>Todo</h1>
         {this.getItems()}
+        <h3>Add Item</h3>
+        <input type="text" onChange={e => this.setState({ newItem: e.target.value })} value={this.state.newItem} />
+        <button onClick={() => this.addItem()}>add</button>
       </div>
     )
   };
